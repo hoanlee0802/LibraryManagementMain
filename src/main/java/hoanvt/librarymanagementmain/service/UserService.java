@@ -1,8 +1,7 @@
-package hoanvt.librarymanagementmain.service.UserService;
+package hoanvt.librarymanagementmain.service;
 
 import hoanvt.librarymanagementmain.dto.UserRequestDTO;
 import hoanvt.librarymanagementmain.dto.UserResponseDTO;
-import hoanvt.librarymanagementmain.entity.User;
 
 import java.util.List;
 

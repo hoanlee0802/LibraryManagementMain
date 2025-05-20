@@ -1,10 +1,10 @@
 package hoanvt.librarymanagementmain.controller;
 import hoanvt.librarymanagementmain.dto.UserRequestDTO;
 import hoanvt.librarymanagementmain.dto.UserResponseDTO;
-import hoanvt.librarymanagementmain.service.UserService.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import hoanvt.librarymanagementmain.service.UserService;
 
 import java.util.List;
 
