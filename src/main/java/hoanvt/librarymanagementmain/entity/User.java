@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -25,7 +26,7 @@ public class User {
     private String phone;
     private String identityNumber;
     private Integer age;
-    private LocalDate birthday;
+    private Date birthday;
     private String address;
 
     private LocalDateTime createdDate;
@@ -55,4 +56,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "post_id"))
     private Set<Post> favoritePosts;
+
+
+
 }

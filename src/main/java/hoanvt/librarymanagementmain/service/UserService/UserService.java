@@ -1,12 +1,19 @@
 package hoanvt.librarymanagementmain.service.UserService;
 
+import hoanvt.librarymanagementmain.dto.UserRequestDTO;
+import hoanvt.librarymanagementmain.dto.UserResponseDTO;
 import hoanvt.librarymanagementmain.entity.User;
+
 import java.util.List;
 
 public interface UserService {
-    User createUser(User user);
-    User updateUser(Long id, User user);
+    UserResponseDTO createUser(UserRequestDTO userDto);
+
+    UserResponseDTO getUserById(Long id);
+
+    UserResponseDTO updateUser(Long id, UserRequestDTO userDto);
+
     void deleteUser(Long id);
-    User getUserById(Long id);
-    List<User> getAllUsers();
+
+    List<UserResponseDTO> getAllUsers();
 }
