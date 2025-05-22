@@ -3,6 +3,7 @@ package hoanvt.librarymanagementmain.controller;
 import hoanvt.librarymanagementmain.dto.RoleGroupRequestDTO;
 import hoanvt.librarymanagementmain.dto.RoleGroupResponseDTO;
 import hoanvt.librarymanagementmain.service.RoleGroupService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class RoleGroupController {
     private RoleGroupService roleGroupService;
 
     @PostMapping
-    public ResponseEntity<RoleGroupResponseDTO> create(@RequestBody RoleGroupRequestDTO dto) {
+    public ResponseEntity<RoleGroupResponseDTO> create(@RequestBody @Valid RoleGroupRequestDTO dto) {
         return ResponseEntity.ok(roleGroupService.createRoleGroup(dto));
     }
 
@@ -29,7 +30,7 @@ public class RoleGroupController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RoleGroupResponseDTO> update(@PathVariable Long id, @RequestBody RoleGroupRequestDTO dto) {
+    public ResponseEntity<RoleGroupResponseDTO> update(@PathVariable Long id, @RequestBody @Valid RoleGroupRequestDTO dto) {
         RoleGroupResponseDTO updated = roleGroupService.updateRoleGroup(id, dto);
         if (updated != null) return ResponseEntity.ok(updated);
         return ResponseEntity.notFound().build();

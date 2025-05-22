@@ -3,6 +3,7 @@ package hoanvt.librarymanagementmain.controller;
 import hoanvt.librarymanagementmain.dto.BorrowRecordRequestDTO;
 import hoanvt.librarymanagementmain.dto.BorrowRecordResponseDTO;
 import hoanvt.librarymanagementmain.service.BorrowRecordService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,21 +26,21 @@ public class BorrowRecordController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_VIEW_BORROW')")
+    @PreAuthorize("hasRole('ROLE_VIEW_BORROW')")
     public ResponseEntity<List<BorrowRecordResponseDTO>> getMyBorrows(Principal principal) {
         Long userId = getCurrentUserId(principal);
         return ResponseEntity.ok(borrowRecordService.getMyBorrowRecords(userId));
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_CREATE_BORROW')")
-    public ResponseEntity<BorrowRecordResponseDTO> create(@RequestBody BorrowRecordRequestDTO dto, Principal principal) {
+    @PreAuthorize("hasRole('ROLE_CREATE_BORROW')")
+    public ResponseEntity<BorrowRecordResponseDTO> create(@RequestBody @Valid BorrowRecordRequestDTO dto, Principal principal) {
         dto.setUserId(getCurrentUserId(principal)); // Ensure user is set
         return ResponseEntity.ok(borrowRecordService.createBorrowRecord(dto));
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ROLE_VIEW_BORROW')")
+    @PreAuthorize("hasRole('ROLE_VIEW_BORROW')")
     public ResponseEntity<BorrowRecordResponseDTO> getById(@PathVariable Long id, Principal principal) {
         BorrowRecordResponseDTO br = borrowRecordService.getBorrowRecordById(id, getCurrentUserId(principal));
         if (br != null) return ResponseEntity.ok(br);
@@ -47,15 +48,15 @@ public class BorrowRecordController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('ROLE_UPDATE_BORROW')")
-    public ResponseEntity<BorrowRecordResponseDTO> update(@PathVariable Long id, @RequestBody BorrowRecordRequestDTO dto, Principal principal) {
+    @PreAuthorize("hasRole('ROLE_UPDATE_BORROW')")
+    public ResponseEntity<BorrowRecordResponseDTO> update(@PathVariable Long id, @RequestBody @Valid BorrowRecordRequestDTO dto, Principal principal) {
         BorrowRecordResponseDTO br = borrowRecordService.updateBorrowRecord(id, dto, getCurrentUserId(principal));
         if (br != null) return ResponseEntity.ok(br);
         return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ROLE_DELETE_BORROW')")
+    @PreAuthorize("hasRole('ROLE_DELETE_BORROW')")
     public ResponseEntity<Void> delete(@PathVariable Long id, Principal principal) {
         borrowRecordService.deleteBorrowRecord(id, getCurrentUserId(principal));
         return ResponseEntity.noContent().build();

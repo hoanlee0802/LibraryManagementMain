@@ -1,6 +1,7 @@
 package hoanvt.librarymanagementmain.controller;
 import hoanvt.librarymanagementmain.dto.UserRequestDTO;
 import hoanvt.librarymanagementmain.dto.UserResponseDTO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO userDto) {
+    public ResponseEntity<UserResponseDTO> createUser(@RequestBody @Valid UserRequestDTO userDto) {
         UserResponseDTO createdUser = userService.createUser(userDto);
         return ResponseEntity.ok(createdUser);
     }
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id, @RequestBody UserRequestDTO userDto) {
+    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id, @RequestBody @Valid UserRequestDTO userDto) {
         UserResponseDTO updatedUser = userService.updateUser(id, userDto);
         if (updatedUser != null) {
             return ResponseEntity.ok(updatedUser);

@@ -3,6 +3,7 @@ package hoanvt.librarymanagementmain.controller;
 import hoanvt.librarymanagementmain.dto.BookRequestDTO;
 import hoanvt.librarymanagementmain.dto.BookResponseDTO;
 import hoanvt.librarymanagementmain.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping
-    public ResponseEntity<BookResponseDTO> createBook(@RequestBody BookRequestDTO bookDto) {
+    public ResponseEntity<BookResponseDTO> createBook(@Valid @RequestBody BookRequestDTO bookDto) {
         BookResponseDTO createdBook = bookService.createBook(bookDto);
         return ResponseEntity.ok(createdBook);
     }
@@ -32,7 +33,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BookResponseDTO> updateBook(@PathVariable Long id, @RequestBody BookRequestDTO bookDto) {
+    public ResponseEntity<BookResponseDTO> updateBook(@PathVariable Long id, @RequestBody @Valid BookRequestDTO bookDto) {
         BookResponseDTO updatedBook = bookService.updateBook(id, bookDto);
         if (updatedBook != null) {
             return ResponseEntity.ok(updatedBook);
@@ -40,11 +41,11 @@ public class BookController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
-        bookService.deleteBook(id);
-        return ResponseEntity.noContent().build();
-    }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
+//        bookService.deleteBook(id);
+//        return ResponseEntity.noContent().build();
+//    }
 
     @GetMapping
     public ResponseEntity<List<BookResponseDTO>> getAllBooks() {

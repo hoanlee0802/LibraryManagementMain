@@ -83,10 +83,10 @@ public class BookServiceImpl implements BookService {
         return null;
     }
 
-    @Override
-    public void deleteBook(Long id) {
-        bookRepository.deleteById(id);
-    }
+//    @Override
+//    public void deleteBook(Long id) {
+//        bookRepository.deleteById(id);
+//    }
 
     @Override
     public List<BookResponseDTO> getAllBooks() {

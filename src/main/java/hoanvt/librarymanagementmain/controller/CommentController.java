@@ -3,6 +3,7 @@ package hoanvt.librarymanagementmain.controller;
 import hoanvt.librarymanagementmain.dto.CommentRequestDTO;
 import hoanvt.librarymanagementmain.dto.CommentResponseDTO;
 import hoanvt.librarymanagementmain.service.CommentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class CommentController {
 
     // Create comment
     @PostMapping
-    public ResponseEntity<CommentResponseDTO> create(@RequestBody CommentRequestDTO dto) {
+    public ResponseEntity<CommentResponseDTO> create(@RequestBody @Valid CommentRequestDTO dto) {
         return ResponseEntity.ok(commentService.createComment(dto));
     }
 
@@ -38,7 +39,7 @@ public class CommentController {
 
     // Update comment (only content can be updated)
     @PutMapping("/{id}")
-    public ResponseEntity<CommentResponseDTO> update(@PathVariable Long id, @RequestBody CommentRequestDTO dto) {
+    public ResponseEntity<CommentResponseDTO> update(@PathVariable Long id, @RequestBody @Valid CommentRequestDTO dto) {
         CommentResponseDTO updated = commentService.updateComment(id, dto);
         if (updated != null) return ResponseEntity.ok(updated);
         return ResponseEntity.notFound().build();

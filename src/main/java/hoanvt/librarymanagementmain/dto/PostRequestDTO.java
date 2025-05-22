@@ -1,11 +1,17 @@
 package hoanvt.librarymanagementmain.dto;
 
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
 public class PostRequestDTO {
+    @NotBlank
     private String title;
+
+    @NotBlank
     private String content;
-    private Long bookId;  // optional: link post to a book
+
+    @NotNull
+    private Long bookId;
 }
 

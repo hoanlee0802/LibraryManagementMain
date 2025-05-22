@@ -9,6 +9,6 @@ public interface BookService {
     BookResponseDTO createBook(BookRequestDTO dto);
     BookResponseDTO getBookById(Long id);
     BookResponseDTO updateBook(Long id, BookRequestDTO dto);
-    void deleteBook(Long id);
+//    void deleteBook(Long id);
     List<BookResponseDTO> getAllBooks();
 }
