@@ -13,4 +13,6 @@ public class UserRequestDTO {
     private Integer age;
     private Date birthday;
     private String address;
+    private Integer IsActive;
+    private Integer IsDeleted;
 }
