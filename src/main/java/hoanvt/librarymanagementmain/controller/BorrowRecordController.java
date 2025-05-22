@@ -34,7 +34,7 @@ public class BorrowRecordController {
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_CREATE_BORROW')")
-    public ResponseEntity<BorrowRecordResponseDTO> create(@RequestBody @Valid BorrowRecordRequestDTO dto, Principal principal) {
+    public ResponseEntity<BorrowRecordResponseDTO> create(@Valid @RequestBody BorrowRecordRequestDTO dto, Principal principal) {
         dto.setUserId(getCurrentUserId(principal)); // Ensure user is set
         return ResponseEntity.ok(borrowRecordService.createBorrowRecord(dto));
     }
@@ -49,7 +49,7 @@ public class BorrowRecordController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_UPDATE_BORROW')")
-    public ResponseEntity<BorrowRecordResponseDTO> update(@PathVariable Long id, @RequestBody @Valid BorrowRecordRequestDTO dto, Principal principal) {
+    public ResponseEntity<BorrowRecordResponseDTO> update(@PathVariable Long id, @Valid @RequestBody BorrowRecordRequestDTO dto, Principal principal) {
         BorrowRecordResponseDTO br = borrowRecordService.updateBorrowRecord(id, dto, getCurrentUserId(principal));
         if (br != null) return ResponseEntity.ok(br);
         return ResponseEntity.notFound().build();

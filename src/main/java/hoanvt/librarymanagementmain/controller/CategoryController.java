@@ -26,7 +26,7 @@ public class CategoryController {
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_CREATE_CATEGORY')")
-    public ResponseEntity<CategoryResponseDTO> create(@RequestBody @Valid CategoryRequestDTO dto) {
+    public ResponseEntity<CategoryResponseDTO> create(@Valid @RequestBody CategoryRequestDTO dto) {
         return ResponseEntity.ok(categoryService.createCategory(dto));
     }
 
@@ -40,7 +40,7 @@ public class CategoryController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_UPDATE_CATEGORY')")
-    public ResponseEntity<CategoryResponseDTO> update(@PathVariable Long id, @RequestBody @Valid CategoryRequestDTO dto) {
+    public ResponseEntity<CategoryResponseDTO> update(@PathVariable Long id, @Valid @RequestBody CategoryRequestDTO dto) {
         CategoryResponseDTO updated = categoryService.updateCategory(id, dto);
         if (updated != null) return ResponseEntity.ok(updated);
         return ResponseEntity.notFound().build();

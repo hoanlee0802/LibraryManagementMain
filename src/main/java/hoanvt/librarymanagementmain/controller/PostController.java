@@ -34,7 +34,7 @@ public class PostController {
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_CREATE_POST')")
-    public ResponseEntity<PostResponseDTO> create(@RequestBody @Valid PostRequestDTO dto, Principal principal) {
+    public ResponseEntity<PostResponseDTO> create(@Valid @RequestBody PostRequestDTO dto, Principal principal) {
         return ResponseEntity.ok(postService.createPost(dto, getCurrentUserId(principal)));
     }
 
@@ -48,7 +48,7 @@ public class PostController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_UPDATE_POST')")
-    public ResponseEntity<PostResponseDTO> update(@PathVariable Long id, @RequestBody @Valid PostRequestDTO dto, Principal principal) {
+    public ResponseEntity<PostResponseDTO> update(@PathVariable Long id, @Valid @RequestBody PostRequestDTO dto, Principal principal) {
         PostResponseDTO post = postService.updatePost(id, dto, getCurrentUserId(principal));
         if (post != null) return ResponseEntity.ok(post);
         return ResponseEntity.notFound().build();

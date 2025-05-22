@@ -18,7 +18,7 @@ public class RoleGroupController {
     private RoleGroupService roleGroupService;
 
     @PostMapping
-    public ResponseEntity<RoleGroupResponseDTO> create(@RequestBody @Valid RoleGroupRequestDTO dto) {
+    public ResponseEntity<RoleGroupResponseDTO> create(@Valid @RequestBody RoleGroupRequestDTO dto) {
         return ResponseEntity.ok(roleGroupService.createRoleGroup(dto));
     }
 
@@ -30,7 +30,7 @@ public class RoleGroupController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RoleGroupResponseDTO> update(@PathVariable Long id, @RequestBody @Valid RoleGroupRequestDTO dto) {
+    public ResponseEntity<RoleGroupResponseDTO> update(@PathVariable Long id, @Valid @RequestBody RoleGroupRequestDTO dto) {
         RoleGroupResponseDTO updated = roleGroupService.updateRoleGroup(id, dto);
         if (updated != null) return ResponseEntity.ok(updated);
         return ResponseEntity.notFound().build();
