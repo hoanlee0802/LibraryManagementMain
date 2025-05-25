@@ -2,10 +2,14 @@ package hoanvt.librarymanagementmain.service.impl;
 
 import hoanvt.librarymanagementmain.dto.BookRequestDTO;
 import hoanvt.librarymanagementmain.dto.BookResponseDTO;
+import hoanvt.librarymanagementmain.dto.BookSearchRequestDTO;
 import hoanvt.librarymanagementmain.entity.Book;
 import hoanvt.librarymanagementmain.repository.BookRepository;
 import hoanvt.librarymanagementmain.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -93,6 +97,16 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll().stream()
                 .map(this::toResponseDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<BookResponseDTO> searchBooks(BookSearchRequestDTO requestDTO) {
+        Pageable pageable = PageRequest.of(requestDTO.getPage(), requestDTO.getSize());
+        return bookRepository.search(
+                requestDTO.getCode(),
+                requestDTO.getAuthors(),
+                pageable
+        ).map(this::toResponseDTO);
     }
 }
 

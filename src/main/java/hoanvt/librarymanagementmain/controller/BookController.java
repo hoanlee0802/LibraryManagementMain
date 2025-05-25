@@ -2,9 +2,11 @@ package hoanvt.librarymanagementmain.controller;
 
 import hoanvt.librarymanagementmain.dto.BookRequestDTO;
 import hoanvt.librarymanagementmain.dto.BookResponseDTO;
+import hoanvt.librarymanagementmain.dto.BookSearchRequestDTO;
 import hoanvt.librarymanagementmain.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,12 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+
+    @PostMapping("/search")
+    public ResponseEntity<Page<BookResponseDTO>> searchBooks(@Valid @RequestBody BookSearchRequestDTO requestDTO) {
+        Page<BookResponseDTO> books = bookService.searchBooks(requestDTO);
+        return ResponseEntity.ok(books);
+    }
 
     @PostMapping
     public ResponseEntity<BookResponseDTO> createBook(@Valid @RequestBody BookRequestDTO bookDto) {
@@ -39,17 +47,5 @@ public class BookController {
             return ResponseEntity.ok(updatedBook);
         }
         return ResponseEntity.notFound().build();
-    }
-
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
-//        bookService.deleteBook(id);
-//        return ResponseEntity.noContent().build();
-//    }
-
-    @GetMapping
-    public ResponseEntity<List<BookResponseDTO>> getAllBooks() {
-        List<BookResponseDTO> books = bookService.getAllBooks();
-        return ResponseEntity.ok(books);
     }
 }
