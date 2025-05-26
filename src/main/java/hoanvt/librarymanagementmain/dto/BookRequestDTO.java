@@ -5,31 +5,31 @@ import lombok.Data;
 
 @Data
 public class BookRequestDTO {
-    @NotBlank
+//    @NotBlank
     private String code;
 
-    @NotBlank
+//    @NotBlank
     private String title;
 
-    @NotBlank
+//    @NotBlank
     private String authors;
 
-    @NotBlank
+//    @NotBlank
     private String publisher;
 
-    @NotNull
-    @Min(value = 1)
+//    @NotNull
+//    @Min(value = 1)
     private Integer pageCount;
 
-    @NotBlank
+//    @NotBlank
     private String printType;
 
-    @NotBlank
+//    @NotBlank
     private String language;
 
     private String description;
 
-    @NotNull
-    @Min(value = 1)
+//    @NotNull
+//    @Min(value = 1)
     private Integer quantity;
 }

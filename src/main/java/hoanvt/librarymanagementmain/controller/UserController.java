@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserRequestDTO userDto) {
         UserResponseDTO createdUser = userService.createUser(userDto);
         return ResponseEntity.ok(createdUser);
@@ -31,7 +31,7 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id, @Valid @RequestBody UserRequestDTO userDto) {
         UserResponseDTO updatedUser = userService.updateUser(id, userDto);
         if (updatedUser != null) {
@@ -46,7 +46,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
         List<UserResponseDTO> users = userService.getAllUsers();
         return ResponseEntity.ok(users);

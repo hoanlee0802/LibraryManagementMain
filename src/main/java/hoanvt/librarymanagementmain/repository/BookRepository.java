@@ -18,4 +18,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
            "(:code IS NULL OR b.code LIKE %:code%) AND " +
            "(:title IS NULL OR b.title LIKE %:title%)")
     Page<Book> search(String code, String title,
-                                    Pageable pageable);}
+                                    Pageable pageable);
+}

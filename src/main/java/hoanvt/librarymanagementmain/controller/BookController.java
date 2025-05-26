@@ -19,13 +19,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @PostMapping("/search")
-    public ResponseEntity<Page<BookResponseDTO>> searchBooks(@Valid @RequestBody BookSearchRequestDTO requestDTO) {
-        Page<BookResponseDTO> books = bookService.searchBooks(requestDTO);
-        return ResponseEntity.ok(books);
-    }
-
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<BookResponseDTO> createBook(@Valid @RequestBody BookRequestDTO bookDto) {
         BookResponseDTO createdBook = bookService.createBook(bookDto);
         return ResponseEntity.ok(createdBook);
@@ -48,4 +42,18 @@ public class BookController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<BookResponseDTO>> getAllBooks() {
+        List<BookResponseDTO> books = bookService.getAllBooks();
+        return ResponseEntity.ok(books);
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<Page<BookResponseDTO>> searchBooks(@Valid @RequestBody BookSearchRequestDTO requestDTO) {
+        Page<BookResponseDTO> books = bookService.searchBooks(requestDTO);
+        return ResponseEntity.ok(books);
+    }
+
+
 }

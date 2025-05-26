@@ -2,10 +2,14 @@ package hoanvt.librarymanagementmain.service.impl;
 
 import hoanvt.librarymanagementmain.dto.UserRequestDTO;
 import hoanvt.librarymanagementmain.dto.UserResponseDTO;
+import hoanvt.librarymanagementmain.dto.UserSearchRequestDTO;
 import hoanvt.librarymanagementmain.service.UserService;
 import hoanvt.librarymanagementmain.entity.User;
 import hoanvt.librarymanagementmain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +30,7 @@ public class UserServiceImpl implements UserService {
         dto.setAge(user.getAge());
         dto.setBirthday(user.getBirthday());
         dto.setAddress(user.getAddress());
+        dto.setIsDeleted(user.getIsDeleted());
         return dto;
     }
 
@@ -39,6 +44,7 @@ public class UserServiceImpl implements UserService {
         user.setAge(dto.getAge());
         user.setBirthday(dto.getBirthday());
         user.setAddress(dto.getAddress());
+        user.setIsDeleted(dto.getIsDeleted());
         return user;
     }
 
@@ -69,6 +75,7 @@ public class UserServiceImpl implements UserService {
             user.setAge(dto.getAge());
             user.setBirthday(dto.getBirthday());
             user.setAddress(dto.getAddress());
+            user.setIsDeleted(dto.getIsDeleted());
             user = userRepository.save(user);
             return toResponseDTO(user);
         }
@@ -85,5 +92,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll().stream()
                 .map(this::toResponseDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<UserResponseDTO> searchUsers(UserSearchRequestDTO requestDTO) {
+        Pageable pageable = PageRequest.of(requestDTO.getPage(), requestDTO.getSize());
+        return userRepository.search(
+                requestDTO.getUsername(),
+                requestDTO.getEmail(),
+                pageable
+        ).map(this::toResponseDTO);
     }
 }

@@ -6,37 +6,37 @@ import java.util.Date;
 
 @Data
 public class UserRequestDTO {
-    @NotBlank
+//    @NotBlank
     private String username;
 
-    @NotBlank
+//    @NotBlank
     private String password;
 
-    @NotBlank
+//    @NotBlank
     private String fullname;
 
-    @NotBlank
+//    @NotBlank
     private String phoneNumber;
 
-    @NotBlank
+//    @NotBlank
     private String identityNumber;
 
-    @NotNull
-    @Min(0)
+//    @NotNull
+//    @Min(0)
     private Integer age;
 
-    @NotNull
+//    @NotNull
     private Date birthday;
 
-    @NotBlank
+//    @NotBlank
     private String address;
 
-    @NotNull
+//    @NotNull
     @Min(0)
     @Max(1)
     private Integer IsActive;
 
-    @NotNull
+//    @NotNull
     @Min(0)
     @Max(1)
     private Integer IsDeleted;
