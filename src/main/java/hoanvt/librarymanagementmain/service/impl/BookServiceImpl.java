@@ -6,6 +6,7 @@ import hoanvt.librarymanagementmain.dto.BookSearchRequestDTO;
 import hoanvt.librarymanagementmain.entity.Book;
 import hoanvt.librarymanagementmain.repository.BookRepository;
 import hoanvt.librarymanagementmain.service.BookService;
+import hoanvt.librarymanagementmain.specification.BookSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +21,7 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookRepository bookRepository;
+
 
     private BookResponseDTO toResponseDTO(Book book) {
         BookResponseDTO dto = new BookResponseDTO();
@@ -99,14 +101,23 @@ public class BookServiceImpl implements BookService {
                 .collect(Collectors.toList());
     }
 
+//    @Override
+//    public Page<BookResponseDTO> searchBooks(BookSearchRequestDTO requestDTO) {
+//        Pageable pageable = PageRequest.of(requestDTO.getPage(), requestDTO.getSize());
+//        return bookRepository.search(
+//                requestDTO.getCode(),
+//                requestDTO.getAuthors(),
+//                pageable
+//        ).map(this::toResponseDTO);
+//    }
+
     @Override
-    public Page<BookResponseDTO> searchBooks(BookSearchRequestDTO requestDTO) {
-        Pageable pageable = PageRequest.of(requestDTO.getPage(), requestDTO.getSize());
-        return bookRepository.search(
-                requestDTO.getCode(),
-                requestDTO.getAuthors(),
-                pageable
-        ).map(this::toResponseDTO);
+    public Page<BookResponseDTO> searchBooks(BookSearchRequestDTO request, Pageable pageable) {
+        Page<Book> books = bookRepository.findAll(BookSpecification.build(request), pageable);
+        return books.map(this::toResponseDTO);
     }
+
+
+
 }
 

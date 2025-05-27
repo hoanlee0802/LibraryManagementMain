@@ -8,9 +8,9 @@ import lombok.Data;
 @Data
 public class BookSearchRequestDTO {
 
-    private int page = 0;
-
-    private int size = 10;
+//    private int page = 0;
+//
+//    private int size = 10;
 
     private String code;
 
@@ -19,8 +19,10 @@ public class BookSearchRequestDTO {
     private String authors;
 
     private String publisher;
-
-    private String printType;
-
+//
+//    private String printType;
+//
     private String language;
+
+
 }

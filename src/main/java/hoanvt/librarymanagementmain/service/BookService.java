@@ -4,6 +4,7 @@ import hoanvt.librarymanagementmain.dto.BookRequestDTO;
 import hoanvt.librarymanagementmain.dto.BookResponseDTO;
 import hoanvt.librarymanagementmain.dto.BookSearchRequestDTO;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface BookService {
 //    void deleteBook(Long id);
     List<BookResponseDTO> getAllBooks();
 
-    Page<BookResponseDTO> searchBooks(BookSearchRequestDTO requestDTO);
+    Page<BookResponseDTO> searchBooks(BookSearchRequestDTO request, Pageable pageable);
 }
