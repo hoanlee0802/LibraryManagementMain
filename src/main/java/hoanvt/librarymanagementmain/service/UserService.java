@@ -4,6 +4,7 @@ import hoanvt.librarymanagementmain.dto.UserRequestDTO;
 import hoanvt.librarymanagementmain.dto.UserResponseDTO;
 import hoanvt.librarymanagementmain.dto.UserSearchRequestDTO;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface UserService {
     List<UserResponseDTO> getAllUsers();
 
     Page<UserResponseDTO> searchUsers(UserSearchRequestDTO requestDTO);
+
+    void changePassword(Long userId, String rawPassword);
 }

@@ -6,18 +6,18 @@ import java.util.Set;
 
 @Data
 public class RoleGroupRequestDTO {
-    @NotBlank
+//    @NotBlank
     private String roleGroupCode;
 
-    @NotBlank
+//    @NotBlank
     private String roleGroupName;
 
-    @NotNull
+//    @NotNull
     private Set<Long> userIds;
 
-    @NotNull
+//    @NotNull
     private Set<Long> permissionIds;
 
-    @NotBlank
+//    @NotBlank
     private String description;
 }

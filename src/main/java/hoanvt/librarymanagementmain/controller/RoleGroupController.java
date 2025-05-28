@@ -17,7 +17,7 @@ public class RoleGroupController {
     @Autowired
     private RoleGroupService roleGroupService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<RoleGroupResponseDTO> create(@Valid @RequestBody RoleGroupRequestDTO dto) {
         return ResponseEntity.ok(roleGroupService.createRoleGroup(dto));
     }

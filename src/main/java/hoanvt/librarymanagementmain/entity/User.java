@@ -56,7 +56,4 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "post_id"))
     private Set<Post> favoritePosts;
-
-
-
 }
