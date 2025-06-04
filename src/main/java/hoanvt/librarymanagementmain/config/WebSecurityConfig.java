@@ -55,6 +55,11 @@ public class WebSecurityConfig {
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(unauthorizedEntryPoint))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/**","/api/users/*", "/api/role-groups/*" , "/api/books/*").permitAll()
+                        .requestMatchers(
+                                "/api/users/authenticate",
+                                "/api/users/logout",
+                                "/api/users/create"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 );
 

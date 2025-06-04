@@ -100,6 +100,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
             // update all fields except id
             user.setUsername(dto.getUsername());
             user.setPassword(dto.getPassword());
+            if (dto.getPassword() != null) {
+                user.setPassword(passwordEncoder.encode(dto.getPassword()));
+            }
             user.setFullName(dto.getFullname());
             user.setPhone(dto.getPhoneNumber());
             user.setIdentityNumber(dto.getIdentityNumber());

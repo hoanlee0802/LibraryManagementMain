@@ -27,19 +27,19 @@ public class PostController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_VIEW_POST')")
+    @PreAuthorize("hasAuthority('ROLE_VIEW_POST')")
     public ResponseEntity<List<PostResponseDTO>> getAll() {
         return ResponseEntity.ok(postService.getAllPosts());
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_CREATE_POST')")
+    @PreAuthorize("hasAuthority('ROLE_CREATE_POST')")
     public ResponseEntity<PostResponseDTO> create(@Valid @RequestBody PostRequestDTO dto, Principal principal) {
         return ResponseEntity.ok(postService.createPost(dto, getCurrentUserId(principal)));
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_VIEW_POST')")
+    @PreAuthorize("hasAuthority('ROLE_VIEW_POST')")
     public ResponseEntity<PostResponseDTO> getById(@PathVariable Long id) {
         PostResponseDTO post = postService.getPostById(id);
         if (post != null) return ResponseEntity.ok(post);
@@ -47,7 +47,7 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_UPDATE_POST')")
+    @PreAuthorize("hasAuthority('ROLE_UPDATE_POST')")
     public ResponseEntity<PostResponseDTO> update(@PathVariable Long id, @Valid @RequestBody PostRequestDTO dto, Principal principal) {
         PostResponseDTO post = postService.updatePost(id, dto, getCurrentUserId(principal));
         if (post != null) return ResponseEntity.ok(post);
@@ -55,20 +55,20 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_DELETE_POST')")
+    @PreAuthorize("hasAuthority('ROLE_DELETE_POST')")
     public ResponseEntity<Void> delete(@PathVariable Long id, Principal principal) {
         postService.deletePost(id, getCurrentUserId(principal));
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{id}/like")
-    @PreAuthorize("hasRole('ROLE_VIEW_POST')")
+    @PreAuthorize("hasAuthority('ROLE_VIEW_POST')")
     public ResponseEntity<PostResponseDTO> like(@PathVariable Long id, Principal principal) {
         return ResponseEntity.ok(postService.likePost(id, getCurrentUserId(principal)));
     }
 
     @PostMapping("/{id}/dislike")
-    @PreAuthorize("hasRole('ROLE_VIEW_POST')")
+    @PreAuthorize("hasAuthority('ROLE_VIEW_POST')")
     public ResponseEntity<PostResponseDTO> dislike(@PathVariable Long id, Principal principal) {
         return ResponseEntity.ok(postService.dislikePost(id, getCurrentUserId(principal)));
     }

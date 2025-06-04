@@ -26,21 +26,21 @@ public class BorrowRecordController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_VIEW_BORROW')")
+    @PreAuthorize("hasAuthority('ROLE_VIEW_BORROW')")
     public ResponseEntity<List<BorrowRecordResponseDTO>> getMyBorrows(Principal principal) {
         Long userId = getCurrentUserId(principal);
         return ResponseEntity.ok(borrowRecordService.getMyBorrowRecords(userId));
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_CREATE_BORROW')")
+    @PreAuthorize("hasAuthority('ROLE_CREATE_BORROW')")
     public ResponseEntity<BorrowRecordResponseDTO> create(@Valid @RequestBody BorrowRecordRequestDTO dto, Principal principal) {
         dto.setUserId(getCurrentUserId(principal)); // Ensure user is set
         return ResponseEntity.ok(borrowRecordService.createBorrowRecord(dto));
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_VIEW_BORROW')")
+    @PreAuthorize("hasAuthority('ROLE_VIEW_BORROW')")
     public ResponseEntity<BorrowRecordResponseDTO> getById(@PathVariable Long id, Principal principal) {
         BorrowRecordResponseDTO br = borrowRecordService.getBorrowRecordById(id, getCurrentUserId(principal));
         if (br != null) return ResponseEntity.ok(br);
@@ -48,7 +48,7 @@ public class BorrowRecordController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_UPDATE_BORROW')")
+    @PreAuthorize("hasAuthority('ROLE_UPDATE_BORROW')")
     public ResponseEntity<BorrowRecordResponseDTO> update(@PathVariable Long id, @Valid @RequestBody BorrowRecordRequestDTO dto, Principal principal) {
         BorrowRecordResponseDTO br = borrowRecordService.updateBorrowRecord(id, dto, getCurrentUserId(principal));
         if (br != null) return ResponseEntity.ok(br);
@@ -56,7 +56,7 @@ public class BorrowRecordController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_DELETE_BORROW')")
+    @PreAuthorize("hasAuthority('ROLE_DELETE_BORROW')")
     public ResponseEntity<Void> delete(@PathVariable Long id, Principal principal) {
         borrowRecordService.deleteBorrowRecord(id, getCurrentUserId(principal));
         return ResponseEntity.noContent().build();

@@ -15,9 +15,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import hoanvt.librarymanagementmain.service.UserService;
+
 
 import java.util.List;
 
@@ -62,13 +62,13 @@ public class UserController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/adminping", method = RequestMethod.GET)
     public String adminPing() {
         return "Only Admins Can Read This";
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping(value = "/userping", method = RequestMethod.GET)
     public String userPing() {
         return "Any User Can Read This";
@@ -119,17 +119,12 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletRequest request) {
-        String token = extractTokenFromRequest(request);
-        if (token == null || !jwtTokenUtil.validateToken(token, null)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
-        }
-
-        // If you have a blacklist mechanism, add the token to the blacklist here.
-        // jwtTokenUtil.invalidateToken(token); // Uncomment and implement if supported
-
-        return ResponseEntity.ok("Logged out successfully");
+    public ResponseEntity<ApiResponse<Object>> logout() {
+        SecurityContextHolder.clearContext();
+        return ResponseEntity.ok(ApiResponse.success("Logged out"));
     }
+
+
 
     // Utility method to extract Bearer token from Authorization header
     private String extractTokenFromRequest(HttpServletRequest request) {
