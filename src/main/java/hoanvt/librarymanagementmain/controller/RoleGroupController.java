@@ -1,5 +1,6 @@
 package hoanvt.librarymanagementmain.controller;
 
+import hoanvt.librarymanagementmain.dto.AssignPermissionsRequestDTO;
 import hoanvt.librarymanagementmain.dto.RoleGroupRequestDTO;
 import hoanvt.librarymanagementmain.dto.RoleGroupResponseDTO;
 import hoanvt.librarymanagementmain.service.RoleGroupService;
@@ -42,8 +43,32 @@ public class RoleGroupController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<RoleGroupResponseDTO>> getAll() {
         return ResponseEntity.ok(roleGroupService.getAllRoleGroups());
+    }
+
+    @PostMapping("/{id}/assign-permissions")
+    public ResponseEntity<?> assignPermissionsToRoleGroup(
+            @PathVariable Long id,
+            @RequestBody AssignPermissionsRequestDTO request) {
+        roleGroupService.assignPermissionsToRoleGroup(id, request.getPermissionIds());
+        return ResponseEntity.ok("Permissions assigned successfully");
+    }
+
+    @PostMapping("/{id}/add-permission/{permissionId}")
+    public ResponseEntity<?> addPermissionToRoleGroup(
+            @PathVariable Long id,
+            @PathVariable Long permissionId) {
+        roleGroupService.addPermissionToRoleGroup(id, permissionId);
+        return ResponseEntity.ok("Permission added successfully");
+    }
+
+    @PostMapping("/{id}/remove-permission/{permissionId}")
+    public ResponseEntity<?> removePermissionFromRoleGroup(
+            @PathVariable Long id,
+            @PathVariable Long permissionId) {
+        roleGroupService.removePermissionFromRoleGroup(id, permissionId);
+        return ResponseEntity.ok("Permission removed successfully");
     }
 }

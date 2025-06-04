@@ -25,6 +25,8 @@ public class Book {
     private String language;
     private String description;
     private Integer quantity;
+    private Integer isActive;
+    private Integer isDeleted;
 
     @ManyToMany
     @JoinTable(name = "book_category",

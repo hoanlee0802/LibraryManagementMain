@@ -1,11 +1,10 @@
 package hoanvt.librarymanagementmain.controller;
+
 import hoanvt.librarymanagementmain.config.TokenProvider;
+import hoanvt.librarymanagementmain.dto.*;
 import hoanvt.librarymanagementmain.dto.ApiResponse;
-import hoanvt.librarymanagementmain.dto.UserLoginRequestDTO;
-import hoanvt.librarymanagementmain.dto.UserRequestDTO;
-import hoanvt.librarymanagementmain.dto.UserResponseDTO;
-import hoanvt.librarymanagementmain.entity.User;
 import hoanvt.librarymanagementmain.model.AuthToken;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,12 +14,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import hoanvt.librarymanagementmain.service.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -35,6 +33,7 @@ public class UserController {
 
     @Autowired
     private TokenProvider jwtTokenUtil;
+
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> generateToken(@RequestBody UserLoginRequestDTO loginUser) {
@@ -64,14 +63,14 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value="/adminping", method = RequestMethod.GET)
-    public String adminPing(){
+    @RequestMapping(value = "/adminping", method = RequestMethod.GET)
+    public String adminPing() {
         return "Only Admins Can Read This";
     }
 
     @PreAuthorize("hasRole('USER')")
-    @RequestMapping(value="/userping", method = RequestMethod.GET)
-    public String userPing(){
+    @RequestMapping(value = "/userping", method = RequestMethod.GET)
+    public String userPing() {
         return "Any User Can Read This";
     }
 
@@ -111,19 +110,50 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @PostMapping("/change-password")
-    public ResponseEntity<?> changePassword() {
-        ArrayList<Long> userIds = new ArrayList<>();
-        userIds.add(1L);
-        userIds.add(4L);
-        userIds.add(5L);
-        userIds.add(6L);
-        userIds.add(7L);
-        userIds.add(8L);
-        userIds.add(9L);
-        for (Long i : userIds) {
-            userService.changePassword(i, "newPassword123");
-        }
-        return ResponseEntity.ok("Password updated successfully!");
+    @PostMapping("/{id}/assign-roles")
+    public ResponseEntity<?> assignRoleGroupsToUser(
+            @PathVariable Long id,
+            @RequestBody AssignRoleGroupsRequestDTO request) {
+        userService.assignRoleGroupsToUser(id, request.getRoleGroupIds());
+        return ResponseEntity.ok("Role groups assigned successfully");
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        String token = extractTokenFromRequest(request);
+        if (token == null || !jwtTokenUtil.validateToken(token, null)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
+        }
+
+        // If you have a blacklist mechanism, add the token to the blacklist here.
+        // jwtTokenUtil.invalidateToken(token); // Uncomment and implement if supported
+
+        return ResponseEntity.ok("Logged out successfully");
+    }
+
+    // Utility method to extract Bearer token from Authorization header
+    private String extractTokenFromRequest(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
+    }
+
+
+//    @PostMapping("/change-password")
+//    public ResponseEntity<?> changePassword() {
+//        ArrayList<Long> userIds = new ArrayList<>();
+//        userIds.add(1L);
+//        userIds.add(4L);
+//        userIds.add(5L);
+//        userIds.add(6L);
+//        userIds.add(7L);
+//        userIds.add(8L);
+//        userIds.add(9L);
+//        for (Long i : userIds) {
+//            userService.changePassword(i, "newPassword123");
+//        }
+//        return ResponseEntity.ok("Password updated successfully!");
+//    }
 }

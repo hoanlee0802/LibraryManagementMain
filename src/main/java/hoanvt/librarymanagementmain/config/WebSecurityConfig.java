@@ -54,7 +54,7 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(unauthorizedEntryPoint))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/users/*", "/api/role-groups/*").permitAll()
+                        .requestMatchers("/api/**","/api/users/*", "/api/role-groups/*" , "/api/books/*").permitAll()
                         .anyRequest().authenticated()
                 );
 

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
     UserResponseDTO createUser(UserRequestDTO userDto);
@@ -22,4 +23,8 @@ public interface UserService {
     Page<UserResponseDTO> searchUsers(UserSearchRequestDTO requestDTO);
 
     void changePassword(Long userId, String rawPassword);
+
+    void assignRoleGroupsToUser(Long id, Set<Long> roleGroupIds);
+
+
 }

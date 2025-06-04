@@ -3,6 +3,9 @@ package hoanvt.librarymanagementmain.service.impl;
 import hoanvt.librarymanagementmain.dto.UserRequestDTO;
 import hoanvt.librarymanagementmain.dto.UserResponseDTO;
 import hoanvt.librarymanagementmain.dto.UserSearchRequestDTO;
+import hoanvt.librarymanagementmain.entity.Permission;
+import hoanvt.librarymanagementmain.entity.RoleGroup;
+import hoanvt.librarymanagementmain.repository.RoleGroupRepository;
 import hoanvt.librarymanagementmain.service.UserService;
 import hoanvt.librarymanagementmain.entity.User;
 import hoanvt.librarymanagementmain.repository.UserRepository;
@@ -11,6 +14,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -137,14 +141,28 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(),
+                user.getPassword(),
+                getAuthorities(user)
+        );
     }
 
-    private Set<SimpleGrantedAuthority> getAuthority(User user) {
+    private Set<SimpleGrantedAuthority> getAuthorities(User user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        user.getRoleGroups().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleGroupName()));
-        });
+        if (user.getRoleGroups() != null) {
+            for (RoleGroup group : user.getRoleGroups()) {
+                // Gán RoleGroupCode (chuẩn: thêm prefix "ROLE_")
+                authorities.add(new SimpleGrantedAuthority("ROLE_" + group.getRoleGroupCode()));
+
+                // Thêm từng permission của nhóm quyền
+                if (group.getPermissions() != null) {
+                    for (Permission perm : group.getPermissions()) {
+                        authorities.add(new SimpleGrantedAuthority(perm.getPermissionCode()));
+                    }
+                }
+            }
+        }
         return authorities;
     }
 
@@ -152,6 +170,34 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public void changePassword(Long userId, String newPassword) {
         User user = userRepository.findById(userId).orElseThrow();
         user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
+
+    @Autowired
+    private RoleGroupRepository roleGroupRepository;
+
+    // Gán danh sách roleGroup cho user
+    public void assignRoleGroupsToUser(Long userId, Set<Long> roleGroupIds) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Set<RoleGroup> roleGroups = new HashSet<>(roleGroupRepository.findAllById(roleGroupIds));
+        user.setRoleGroups(roleGroups);
+        userRepository.save(user);
+    }
+
+    public void addRoleGroupToUser(Long userId, Long roleGroupId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        RoleGroup roleGroup = roleGroupRepository.findById(roleGroupId)
+                .orElseThrow(() -> new RuntimeException("Role group not found"));
+        user.getRoleGroups().add(roleGroup);
+        userRepository.save(user);
+    }
+
+    public void removeRoleGroupFromUser(Long userId, Long roleGroupId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.getRoleGroups().removeIf(rg -> rg.getId().equals(roleGroupId));
         userRepository.save(user);
     }
 }

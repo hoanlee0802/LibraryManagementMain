@@ -36,7 +36,7 @@ public class User {
     private Integer isActive;
     private Integer isDeleted;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "role_group_user",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_group_id"))

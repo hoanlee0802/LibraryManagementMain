@@ -125,4 +125,32 @@ public class RoleGroupServiceImpl implements RoleGroupService {
         return roleGroupRepository.findAll().stream()
                 .map(this::toResponseDTO).collect(Collectors.toList());
     }
+
+    // Gán danh sách permission cho role group (GHI ĐÈ)
+    public void assignPermissionsToRoleGroup(Long roleGroupId, Set<Long> permissionIds) {
+        RoleGroup roleGroup = roleGroupRepository.findById(roleGroupId)
+                .orElseThrow(() -> new RuntimeException("Role group not found"));
+
+        Set<Permission> permissions = new HashSet<>(permissionRepository.findAllById(permissionIds));
+        roleGroup.setPermissions(permissions);
+        roleGroupRepository.save(roleGroup);
+    }
+
+    // Thêm 1 quyền vào role group (KHÔNG ghi đè)
+    public void addPermissionToRoleGroup(Long roleGroupId, Long permissionId) {
+        RoleGroup roleGroup = roleGroupRepository.findById(roleGroupId)
+                .orElseThrow(() -> new RuntimeException("Role group not found"));
+        Permission permission = permissionRepository.findById(permissionId)
+                .orElseThrow(() -> new RuntimeException("Permission not found"));
+        roleGroup.getPermissions().add(permission);
+        roleGroupRepository.save(roleGroup);
+    }
+
+    // Xóa 1 quyền khỏi role group
+    public void removePermissionFromRoleGroup(Long roleGroupId, Long permissionId) {
+        RoleGroup roleGroup = roleGroupRepository.findById(roleGroupId)
+                .orElseThrow(() -> new RuntimeException("Role group not found"));
+        roleGroup.getPermissions().removeIf(p -> p.getId().equals(permissionId));
+        roleGroupRepository.save(roleGroup);
+    }
 }
