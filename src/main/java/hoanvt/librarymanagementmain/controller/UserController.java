@@ -126,4 +126,10 @@ public class UserController {
         }
         return ResponseEntity.ok("Password updated successfully!");
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<ApiResponse<Object>> logout() {
+        SecurityContextHolder.clearContext();
+        return ResponseEntity.ok(ApiResponse.success("Logged out"));
+    }
 }
