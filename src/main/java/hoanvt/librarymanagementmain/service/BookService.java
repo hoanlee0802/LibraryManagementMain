@@ -1,8 +1,8 @@
 package hoanvt.librarymanagementmain.service;
 
-import hoanvt.librarymanagementmain.dto.BookRequestDTO;
-import hoanvt.librarymanagementmain.dto.BookResponseDTO;
-import hoanvt.librarymanagementmain.dto.BookSearchRequestDTO;
+import hoanvt.librarymanagementmain.dto.request.BookRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.BookResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.BookSearchRequestDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

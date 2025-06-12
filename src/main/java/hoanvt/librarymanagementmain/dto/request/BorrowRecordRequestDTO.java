@@ -1,4 +1,4 @@
-package hoanvt.librarymanagementmain.dto;
+package hoanvt.librarymanagementmain.dto.request;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;

@@ -1,8 +1,5 @@
-package hoanvt.librarymanagementmain.dto;
+package hoanvt.librarymanagementmain.dto.request;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data

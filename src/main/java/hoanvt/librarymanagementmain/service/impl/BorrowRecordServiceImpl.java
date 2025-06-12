@@ -1,7 +1,7 @@
 package hoanvt.librarymanagementmain.service.impl;
 
-import hoanvt.librarymanagementmain.dto.BorrowRecordRequestDTO;
-import hoanvt.librarymanagementmain.dto.BorrowRecordResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.BorrowRecordRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.BorrowRecordResponseDTO;
 import hoanvt.librarymanagementmain.entity.Book;
 import hoanvt.librarymanagementmain.entity.BorrowRecord;
 import hoanvt.librarymanagementmain.entity.User;

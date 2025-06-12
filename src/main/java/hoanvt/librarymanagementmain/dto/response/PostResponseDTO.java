@@ -1,4 +1,4 @@
-package hoanvt.librarymanagementmain.dto;
+package hoanvt.librarymanagementmain.dto.response;
 
 import lombok.Data;
 import java.time.LocalDateTime;

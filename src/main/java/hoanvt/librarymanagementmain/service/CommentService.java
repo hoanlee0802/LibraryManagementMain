@@ -1,7 +1,7 @@
 package hoanvt.librarymanagementmain.service;
 
-import hoanvt.librarymanagementmain.dto.CommentRequestDTO;
-import hoanvt.librarymanagementmain.dto.CommentResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.CommentRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.CommentResponseDTO;
 
 import java.util.List;
 

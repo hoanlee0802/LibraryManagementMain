@@ -1,7 +1,7 @@
 package hoanvt.librarymanagementmain.controller;
 
-import hoanvt.librarymanagementmain.dto.CommentRequestDTO;
-import hoanvt.librarymanagementmain.dto.CommentResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.CommentRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.CommentResponseDTO;
 import hoanvt.librarymanagementmain.service.CommentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

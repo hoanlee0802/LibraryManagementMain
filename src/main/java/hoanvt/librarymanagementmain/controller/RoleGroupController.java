@@ -1,8 +1,8 @@
 package hoanvt.librarymanagementmain.controller;
 
-import hoanvt.librarymanagementmain.dto.AssignPermissionsRequestDTO;
-import hoanvt.librarymanagementmain.dto.RoleGroupRequestDTO;
-import hoanvt.librarymanagementmain.dto.RoleGroupResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.AssignPermissionsRequestDTO;
+import hoanvt.librarymanagementmain.dto.request.RoleGroupRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.RoleGroupResponseDTO;
 import hoanvt.librarymanagementmain.service.RoleGroupService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package hoanvt.librarymanagementmain.service;
 
-import hoanvt.librarymanagementmain.dto.CategoryRequestDTO;
-import hoanvt.librarymanagementmain.dto.CategoryResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.CategoryRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.CategoryResponseDTO;
 
 import java.util.List;
 

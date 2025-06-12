@@ -1,10 +1,9 @@
 package hoanvt.librarymanagementmain.service;
 
-import hoanvt.librarymanagementmain.dto.UserRequestDTO;
-import hoanvt.librarymanagementmain.dto.UserResponseDTO;
-import hoanvt.librarymanagementmain.dto.UserSearchRequestDTO;
+import hoanvt.librarymanagementmain.dto.request.UserRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.UserResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.UserSearchRequestDTO;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 import java.util.Set;

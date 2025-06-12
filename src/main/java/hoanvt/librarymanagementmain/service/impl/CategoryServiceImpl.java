@@ -1,7 +1,7 @@
 package hoanvt.librarymanagementmain.service.impl;
 
-import hoanvt.librarymanagementmain.dto.CategoryRequestDTO;
-import hoanvt.librarymanagementmain.dto.CategoryResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.CategoryRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.CategoryResponseDTO;
 import hoanvt.librarymanagementmain.entity.Category;
 import hoanvt.librarymanagementmain.repository.CategoryRepository;
 import hoanvt.librarymanagementmain.service.CategoryService;

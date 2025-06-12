@@ -1,8 +1,8 @@
 package hoanvt.librarymanagementmain.service.impl;
 
-import hoanvt.librarymanagementmain.dto.UserRequestDTO;
-import hoanvt.librarymanagementmain.dto.UserResponseDTO;
-import hoanvt.librarymanagementmain.dto.UserSearchRequestDTO;
+import hoanvt.librarymanagementmain.dto.request.UserRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.UserResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.UserSearchRequestDTO;
 import hoanvt.librarymanagementmain.entity.Permission;
 import hoanvt.librarymanagementmain.entity.RoleGroup;
 import hoanvt.librarymanagementmain.repository.RoleGroupRepository;
@@ -14,12 +14,10 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

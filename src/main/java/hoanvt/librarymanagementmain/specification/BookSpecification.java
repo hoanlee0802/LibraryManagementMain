@@ -1,6 +1,6 @@
 package hoanvt.librarymanagementmain.specification;
 
-import hoanvt.librarymanagementmain.dto.BookSearchRequestDTO;
+import hoanvt.librarymanagementmain.dto.request.BookSearchRequestDTO;
 import hoanvt.librarymanagementmain.entity.Book;
 import org.springframework.data.jpa.domain.Specification;
 

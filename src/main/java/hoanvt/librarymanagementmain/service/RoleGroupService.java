@@ -1,7 +1,7 @@
 package hoanvt.librarymanagementmain.service;
 
-import hoanvt.librarymanagementmain.dto.RoleGroupRequestDTO;
-import hoanvt.librarymanagementmain.dto.RoleGroupResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.RoleGroupRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.RoleGroupResponseDTO;
 
 import java.util.List;
 import java.util.Set;

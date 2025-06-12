@@ -1,7 +1,7 @@
 package hoanvt.librarymanagementmain.controller;
 
-import hoanvt.librarymanagementmain.dto.BorrowRecordRequestDTO;
-import hoanvt.librarymanagementmain.dto.BorrowRecordResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.BorrowRecordRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.BorrowRecordResponseDTO;
 import hoanvt.librarymanagementmain.service.BorrowRecordService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,9 @@
 package hoanvt.librarymanagementmain.controller;
 
 import hoanvt.librarymanagementmain.dto.ApiResponse;
-import hoanvt.librarymanagementmain.dto.BookRequestDTO;
-import hoanvt.librarymanagementmain.dto.BookResponseDTO;
-import hoanvt.librarymanagementmain.dto.BookSearchRequestDTO;
+import hoanvt.librarymanagementmain.dto.request.BookRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.BookResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.BookSearchRequestDTO;
 import hoanvt.librarymanagementmain.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

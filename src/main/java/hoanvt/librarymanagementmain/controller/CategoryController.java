@@ -1,7 +1,7 @@
 package hoanvt.librarymanagementmain.controller;
 
-import hoanvt.librarymanagementmain.dto.CategoryRequestDTO;
-import hoanvt.librarymanagementmain.dto.CategoryResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.CategoryRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.CategoryResponseDTO;
 import hoanvt.librarymanagementmain.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

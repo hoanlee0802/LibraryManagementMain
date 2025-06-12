@@ -1,7 +1,7 @@
 package hoanvt.librarymanagementmain.service.impl;
 
-import hoanvt.librarymanagementmain.dto.PostRequestDTO;
-import hoanvt.librarymanagementmain.dto.PostResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.PostRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.PostResponseDTO;
 import hoanvt.librarymanagementmain.entity.Book;
 import hoanvt.librarymanagementmain.entity.Post;
 import hoanvt.librarymanagementmain.entity.User;

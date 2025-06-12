@@ -1,7 +1,7 @@
 package hoanvt.librarymanagementmain.service.impl;
 
-import hoanvt.librarymanagementmain.dto.CommentRequestDTO;
-import hoanvt.librarymanagementmain.dto.CommentResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.CommentRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.CommentResponseDTO;
 import hoanvt.librarymanagementmain.entity.Comment;
 import hoanvt.librarymanagementmain.entity.Post;
 import hoanvt.librarymanagementmain.entity.User;

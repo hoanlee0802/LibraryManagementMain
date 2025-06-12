@@ -1,7 +1,7 @@
 package hoanvt.librarymanagementmain.service;
 
-import hoanvt.librarymanagementmain.dto.PostRequestDTO;
-import hoanvt.librarymanagementmain.dto.PostResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.PostRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.PostResponseDTO;
 
 import java.util.List;
 

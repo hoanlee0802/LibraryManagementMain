@@ -1,8 +1,8 @@
 package hoanvt.librarymanagementmain.service.impl;
 
 import hoanvt.librarymanagementmain.dto.RoleGroupPermissionDTO;
-import hoanvt.librarymanagementmain.dto.RoleGroupRequestDTO;
-import hoanvt.librarymanagementmain.dto.RoleGroupResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.RoleGroupRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.RoleGroupResponseDTO;
 import hoanvt.librarymanagementmain.dto.RoleGroupUserDTO;
 import hoanvt.librarymanagementmain.entity.Permission;
 import hoanvt.librarymanagementmain.entity.RoleGroup;

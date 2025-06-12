@@ -1,7 +1,7 @@
 package hoanvt.librarymanagementmain.controller;
 
-import hoanvt.librarymanagementmain.dto.PostRequestDTO;
-import hoanvt.librarymanagementmain.dto.PostResponseDTO;
+import hoanvt.librarymanagementmain.dto.request.PostRequestDTO;
+import hoanvt.librarymanagementmain.dto.response.PostResponseDTO;
 import hoanvt.librarymanagementmain.service.PostService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

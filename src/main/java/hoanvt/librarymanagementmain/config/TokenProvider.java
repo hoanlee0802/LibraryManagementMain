@@ -1,6 +1,5 @@
 package hoanvt.librarymanagementmain.config;
 
-import hoanvt.librarymanagementmain.dto.UserResponseDTO;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
